@@ -1,4 +1,8 @@
-# PV16
+# Appli data+local forfait post-stationnement
+
+L'appli a été codé en Angular.js
+
+Pour lancer l'appli en local, vous aurez besoin de Node.js sur vos postes et npm. Faites ensuite un npm install en ligne de commande dans le dossier de l'appli. Angular CLI devrait être installé automatiquement, puis suivez ces conseils :point_down:
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.0-rc.2.
 
