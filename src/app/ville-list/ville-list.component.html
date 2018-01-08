@@ -1,0 +1,10 @@
+<div>
+    <app-ville-autocomplete  fxLayoutAlign="space-between"></app-ville-autocomplete>
+</div>
+<mat-nav-list>
+    <h3 matSubheader>Cliquez sur une ville</h3>
+    <a mat-list-item routerLink="/{{rootUrl + '/'}}{{ville.Ville}}" *ngFor="let ville of villes$ | async">
+        <mat-icon mat-list-icon>location_city</mat-icon>
+        <h4 mat-line>{{ville.Ville}} <span *ngIf="ville.codeDepartement">({{ville.codeDepartement}})</span></h4>
+    </a>
+</mat-nav-list>

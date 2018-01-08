@@ -1,0 +1,24 @@
+<div *ngIf="diagrammeData && diagrammeData.cities && diagrammeData.cities.length > 1">
+  <div class="progress center" *ngFor="let currentVille of orderBy(diagrammeData.cities, field)">
+    <section >
+      <label fxFlex='30'>
+        <a class="{{ville.Ville !== currentVille.Ville ? 'ville-name' : 'ville-name-bold'}} " routerLink="/{{rootUrl}}/{{currentVille.Ville}}">{{currentVille.Ville}}</a>
+      </label>
+      <div fxFlex='70'>
+        <div *ngIf="isDataValid(currentVille) && parseFloat(currentVille[field]) > 0; else stationnementGratuit">
+          <div>
+            <div class="{{ville.Ville === currentVille.Ville ? 'barre-fonce' : 'barre'}} center" fxFlex='{{computeWidth(currentVille)}}'><strong>{{currentVille[field]}} €</strong></div>
+          </div>
+        </div>
+        <ng-template #stationnementGratuit>
+          <div *ngIf="isDataValid(currentVille)" class="barre-bleue center">
+            <div class="center">Stationnement gratuit</div>
+          </div>
+          <div *ngIf="!isDataValid(currentVille)" class="barre-nodata">
+            <div class="center">Pas de donnée</div>
+          </div>
+        </ng-template>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<mat-card *ngIf="ville$ | async as ville">
+    <div class="container" fxLayout fxLayout.xs="column"  fxLayoutGap="10px" fxLayoutGap.xs="0">
+        <div fxFlex="100%">
+            <mat-card-header >
+                <mat-card-subtitle>
+                    <h3>{{ville.nomDepartement}} <span *ngIf="ville.codeDepartement">({{ville.codeDepartement}})</span></h3>
+                </mat-card-subtitle>
+                <mat-card-title> 
+                    <h2>À {{displayVilleName(ville)}}, combien peut coûter votre stationnement ?</h2>
+                </mat-card-title>
+            </mat-card-header>
+            <div>
+                Depuis le 1er janvier 2018, les amendes de stationnement sont remplacées par le <b>forfait post stationnement</b>. Près de 800 communes sont concernées par ce changement. Les nouveaux tarifs ont été fixés en conseil municipal.
+              <p>
+                <a *ngIf="ville.source" href="{{ville.source}}" target="_blank">Consultez l'article qui explique ce nouveau fonctionnement à {{displayVilleName(ville)}}.</a>
+              </p>
+            </div>
+        </div>
+    </div>
+    <mat-card-content>
+        <div *ngIf="ville">
+            <div *ngIf="isDataValid(ville); else noDataTemplate">
+                <div *ngIf="ville.FPS_mini == 0 && ville.FPS_maxi == 0">
+                    Dans la ville de {{displayVilleName(ville)}} le stationnement est gratuit.
+                </div>
+                <div *ngIf="ville.FPS_mini == ville.FPS_maxi">
+                    Dans cette commune, le forfait post-stationnement s'élève à <b>{{ville.FPS_mini}} €</b>.
+                    <span *ngIf="ville.fps_mini_delai"> Si vous réglez sous {{ville.fps_mini_delai}}, le forfait est réduit à {{ville.mini_minore}}.</span>
+                    <p>Le prix du forfait mini post-stationnement à {{displayVilleName(ville)}} comparé aux autres villes du département</p>
+                    <div class="ville-diagram">
+                        <app-diagramme-prix [ville]="ville" field="FPS_mini"></app-diagramme-prix>
+                    </div>
+                </div>
+                <div *ngIf="ville.FPS_mini != ville.FPS_maxi">
+                    <h4>Dans la zone de stationnement la moins chère, le forfait post-stationnement peut s'élever à <b>{{ville.FPS_mini}} €</b>.<span *ngIf="ville.fps_mini_delai"> Si vous réglez sous {{ville.fps_mini_delai}}, le forfait est réduit à {{ville.mini_minore}}.</span></h4>
+                    <p>Le prix du forfait mini post-stationnement à {{displayVilleName(ville)}}  comparé aux autres villes du département</p>
+                    <div class="ville-diagram">
+                        <app-diagramme-prix [ville]="ville" field="FPS_mini"></app-diagramme-prix>
+                    </div>
+                    <br/>
+                    <h4>Dans la zone de stationnement la plus chère, le forfait post-stationnement peut s'élever à <b>{{ville.FPS_maxi}} €</b>.<span *ngIf="ville.fps_maxi_delai"> Si vous réglez sous {{ville.fps_maxi_delai}}, le forfait est réduit à {{ville.maxi_minore}}.</span></h4>
+                    <p>Le prix du forfait maxi post-stationnement à {{displayVilleName(ville)}}  comparé aux autres villes du département</p>
+                    <div class="ville-diagram">
+                        <app-diagramme-prix [ville]="ville" field="FPS_maxi"></app-diagramme-prix>
+                    </div>
+                </div>
+            </div>
+            <ng-template #noDataTemplate>
+                <div>
+                    <h3>
+                        Les données concernant le forfait post-stationnement (FPS) ne sont pas disponibles pour le moment. Vous avez des informations supplémentaires concernant cette commune ? <a href="{{formUrl}}">Dites-le nous !</a>
+                    </h3>
+                </div>
+            </ng-template>
+            <h3 *ngIf="ville.commentaire">Précisions à propos du forfait post stationnement à {{displayVilleName(ville)}} :</h3>
+            <p *ngIf="ville.commentaire">
+                {{ville.commentaire}}
+            </p>
+        </div>
+        <br/>
+        <div>
+            <mat-card-actions>
+                <a fxFlex='100' mat-raised-button *ngIf="ville.Source" href="{{ville.Source}}" target="_blank">Consultez l'article</a>
+            </mat-card-actions>
+        </div>
+        <div>
+            <h3>Comment fonctionne le forfait post stationnement ?</h3>
+            <p>Comme auparavant, vous devez vous acquitter à un horodateur de la somme correspondante à la durée de votre stationnement. Si vous dépassez cette durée, vous pourrez être sanctionné et devoir payer un forfait post-stationnement (FPS). Cependant le montant déjà réglé par l'automobiliste à l'horodateur sera déduit de ce FPS.</p>
+            <p>Le montant de ce forfait a été fixé par votre municipalité. Les communes ont également la possibilité de minorer et majorer ces montants.</p>
+            <p><em><b>Exemple :</b> Je stationne à 9h, je souhaite rester jusqu'à 10h, le tarif est de 2€ l'heure, je règle donc 2€ à l'horodateur. Je reste finalement jusqu'à 11h, un agent qui est passé à 10h30 a constaté l'insuffisance de paiement, il me facture donc un FPS. La commune a défini le FPS à 20€, je devrais donc régler 18€ (20€ - 2€ déjà réglés).</em></p>
+            <p><a href="//www.gart.org/actualite/nouvelle-infographie-explicative-de-reforme-stationnement/" target="_blank">Les explications du Groupement des Autorités Responsables de Transport</a></p>
+            </div>
+        <mat-card-actions>
+            <a fxFlex='50' mat-raised-button id="appName" href="{{basePath + rootUrl}}"><b>Nouvelle recherche</b></a>
+            <a fxFlex='50' mat-raised-button *ngIf="formUrl" href="{{formUrl}}" target="_blank"><b>Apportez des précisions</b></a>
+        </mat-card-actions>
+        <div class="madeBy">
+            Cette application a été réalisée par <a target="_blank" href="//lesagitesdulocal.org/comment-organiser-un-journocamp-data-local-clermont-2017">un collectif de journalistes de presse quotidienne régionale</a>
+        </div>
+    </mat-card-content>
+</mat-card>

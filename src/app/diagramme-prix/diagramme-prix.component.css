@@ -1,0 +1,65 @@
+/* Diagramme */
+.progress {
+    margin-top:15px;
+}
+
+.ville-diagram label{
+    margin-right:5px
+}
+
+.progress mat-progress-bar {
+    height: 25px;
+}
+
+
+.barre, .barre-fonce {
+    height: 25px;
+}
+
+.barre {
+    background-color:  #db8d8d;
+}
+
+.barre-fonce {
+    background-color: #b71c1c;
+    color: white;
+}
+
+.barre-bleue {
+    background-color: #DFEFFF;
+    height: 25px;
+}
+
+.barre-nodata {
+    background-color: #ebebeb;
+    height: 25px;
+}
+
+.barre .center, .barre.center, .barre-fonce.center, .barre-bleue.center, .barre-nodata{
+    padding-top: 5px;
+}
+
+.ville-name {
+    text-decoration: none;
+    color: black;
+}
+
+.ville-name-bold {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.center {
+    text-align: center;
+    vertical-align: middle;
+}
+
+a {
+    text-decoration: underline;
+    color: grey;
+}
+
+label {
+    padding-top: 5px;
+}

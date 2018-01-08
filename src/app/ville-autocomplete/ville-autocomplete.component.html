@@ -1,0 +1,4 @@
+<mat-form-field fxFlex="100" class="searchField">
+  <input matInput #filterBox placeholder="Recherchez votre ville" aria-label="Ville" (keyup)="filter(filterBox.value)">
+  <mat-icon matSuffix color="$custom-app-secondary">search</mat-icon>
+</mat-form-field>
