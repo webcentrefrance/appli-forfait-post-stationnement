@@ -1,6 +1,8 @@
 # Appli data+local forfait post-stationnement
 
-L'appli a été codé en Angular.js
+L'application est distribuée sous la licence CC BY-NC-SA 3.0 France
+
+L'appli a été codée en Angular.js
 
 Pour lancer l'appli en local, vous aurez besoin de Node.js sur vos postes et npm. Faites ensuite un npm install en ligne de commande dans le dossier de l'appli. Angular CLI devrait être installé automatiquement, puis suivez ces conseils :point_down:
 
